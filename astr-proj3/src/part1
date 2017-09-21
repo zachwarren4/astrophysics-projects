@@ -1,0 +1,20 @@
+import numpy as np
+import pandas as pd
+import math as math
+
+def toCart(df,RA,DEC,z):
+    dist = 3000*z
+    df['x'] = dist*math.cos(DEC)*math.cos(RA)
+    df['y'] = dist*math.cos(DEC)*math.sin(RA)
+    df['z'] = dist*math.sin(DEC)
+
+def correlation(data, rand):
+    LocationD = r'C:\Users\Zachary Warren\OneDrive\S2 2015-2016\ASTR 3800\Homework3\src\%s' %data
+    LocationR = r'C:\Users\Zachary Warren\OneDrive\S2 2015-2016\ASTR 3800\Homework3\src\%s' %rand
+    dfD = pd.read_csv(LocationD, delimiter = ' ', names = ['RA', 'Declination', 'z'], skipinitialspace = True)
+    dfR = pd.read_csv(LocationR, delimiter = ' ', names = ['RA', 'Declination', 'z'], skipinitialspace = True)
+
+    dfD.to_csv('data1.csv')
+    dfR.tocsv('data1R.csv')
+
+correlation('SDSS_Mr20_rspace.dat','SDSS_random.dat')
